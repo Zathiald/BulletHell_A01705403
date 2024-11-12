@@ -19,8 +19,10 @@ public class ShipController : MonoBehaviour
     public bool canMove = true;
 
     // Variables de disparo
-    public GameObject bulletPrefab;   // Prefab de la bala
-    public Transform[] firePoints;      // Primer punto de disparo
+    public GameObject bulletPrefab;     // Prefab de la bala
+    public Transform[] firePoints;      // Puntos de disparo
+    public float fireRate = 0.5f;       // Tiempo entre ráfagas de disparo (en segundos)
+    private float fireCooldown = 0f;    // Temporizador para controlar la frecuencia de disparo
 
     void Start()
     {
@@ -65,13 +67,20 @@ public class ShipController : MonoBehaviour
             Boost(false);
         }
 
-        // Detecta el disparo desde el Shift izquierdo o el clic derecho
-        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetMouseButton(1)))
+        // Controla el disparo y el tiempo de espera entre ráfagas
+        fireCooldown -= Time.deltaTime;
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetMouseButton(1)) && fireCooldown <= 0f)
         {
-            foreach (Transform firePoint in firePoints)
-            {
-                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            }
+            FireAllBullets();
+            fireCooldown = fireRate;  // Reinicia el temporizador
+        }
+    }
+
+    void FireAllBullets()
+    {
+        foreach (Transform firePoint in firePoints)
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         }
     }
 
@@ -90,6 +99,4 @@ public class ShipController : MonoBehaviour
         trail.GetComponent<TrailRenderer>().emitting = state;
         activeForwardSpeed = activeForwardSpeed * boostSpeed;
     }
-
 }
-

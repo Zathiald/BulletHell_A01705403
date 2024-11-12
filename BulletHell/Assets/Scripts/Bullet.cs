@@ -8,25 +8,28 @@ public class Bullet : MonoBehaviour
     public float speed = 50f;
     public float timeDestroy = 3f;
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Rota la bala 90 grados en el eje X para que visualmente esté orientada correctamente
+        transform.Rotate(90f, 0f, 0f);
+
         // Inicializa el Rigidbody
         rb = GetComponent<Rigidbody>();
-        
+    }
+
+    void Update()
+    {
         if (rb != null) 
         {
-            rb.velocity = transform.forward * speed; // Aplica la velocidad hacia adelante
+            // Aplica la velocidad hacia adelante en función de la rotación del objeto (ya rotado en X)
+            rb.velocity = transform.up * speed; // Usa 'up' para moverlo según la rotación ajustada
         }
         else
         {
             Debug.LogError("Rigidbody no encontrado en la bala.");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        
         Destroy(gameObject, timeDestroy); // Destruye la bala después de 'timeDestroy' segundos
     }
 }
+
