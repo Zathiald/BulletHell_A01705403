@@ -3,7 +3,92 @@ guid: 2069c32faf43c7f4bba087d719212865
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: c256e2f7eac3d704580dd186b758f3e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE11
+    second: {fileID: 2100000, guid: bbf3bee89f0f2a04982787e08e375fc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE13
+    second: {fileID: 2100000, guid: 45ddeb44ba0705944bb446271724e637, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE14
+    second: {fileID: 2100000, guid: 89016a60f98905c43869edcffd87896c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE15
+    second: {fileID: 2100000, guid: 4f0204a8f1e0151499406fcc9ac02f09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE17
+    second: {fileID: 2100000, guid: ba127ca6fdc4a0e458ddd38a3f379eaf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE18
+    second: {fileID: 2100000, guid: 9003f59f5b9eff54ea66569f1bbfe305, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE20
+    second: {fileID: 2100000, guid: ae6e310d8da067f4bb82bd2385a88167, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE21
+    second: {fileID: 2100000, guid: 813e1125a7f42494798abc54e81cb530, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE23
+    second: {fileID: 2100000, guid: 916b38d0daa13a8479ec7ddc4363f5f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE24
+    second: {fileID: 2100000, guid: 3a7bd247962bc4044b0d8159daf8cc3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE25
+    second: {fileID: 2100000, guid: bf50fa62cfff4004dbd86403a54fbd11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE5
+    second: {fileID: 2100000, guid: 2d94635005e0d2f42b487a3aa5ee8f7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE6
+    second: {fileID: 2100000, guid: d15c81ab9e2c5b54b96bc764f5a87e55, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE7
+    second: {fileID: 2100000, guid: 7f7de0f65221c11468d0f4227b05d12b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE8
+    second: {fileID: 2100000, guid: 76113f137e400f343a1e3dae33351b40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE9
+    second: {fileID: 2100000, guid: 531a5e0ae0cb9cc45954e725301d1d86, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
