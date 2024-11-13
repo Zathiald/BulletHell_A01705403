@@ -3,12 +3,10 @@ using UnityEngine;
 
 public class SpiningShooter : MonoBehaviour
 {
-    public float circleRadius = 5f;      // Radio del movimiento circular
-    public float circleSpeed = 1f;       // Velocidad del movimiento circular
+
     public float rotationSpeed = 50f;    // Velocidad de rotación del objeto
     public GameObject bulletPrefab;      // Prefab del proyectil
     public float fireRate = 1f;          // Intervalo de disparo en segundos
-    public float projectileSpeed = 10f;  // Velocidad del proyectil
     public Transform[] firePoints;       // Puntos desde los cuales disparar
 
     private float angle = 0f;

@@ -131,12 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b9d9f1aa78a474aafedb02bf066d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleRadius: 10
-  circleSpeed: 1
   rotationSpeed: 50
   bulletPrefab: {fileID: 726262522130735890, guid: 0da595aede963474b82278c9bc8d883d, type: 3}
   fireRate: 0
-  projectileSpeed: 10
   firePoints:
   - {fileID: 4472885931432617770}
   - {fileID: 2417625050932812913}
