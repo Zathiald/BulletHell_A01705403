@@ -65,9 +65,8 @@ MonoBehaviour:
   circle: {fileID: 4664501739809373997}
   canMove: 1
   bulletPrefab: {fileID: 0}
-  firePoint1: {fileID: 0}
-  firePoint2: {fileID: 0}
-  bulletSpeed: 20
+  firePoints: []
+  fireRate: 0.5
 --- !u!1 &1569671561207998833
 GameObject:
   m_ObjectHideFlags: 0
