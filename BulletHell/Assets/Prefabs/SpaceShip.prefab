@@ -53,19 +53,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87bd68ea8cf7a9f48a6d7a703f427a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 50
+  forwardSpeed: 30
   strafeSpeed: 10
-  hoverSpeed: 5
+  hoverSpeed: 30
   lookRateSpeed: 45
   tiltAmount: 45
   rollSpeed: 90
   rollAcceleration: 3.5
-  boostSpeed: 5
+  boostSpeed: 2
   trail: {fileID: 9065375819391404924}
   circle: {fileID: 4664501739809373997}
   canMove: 1
-  bulletPrefab: {fileID: 0}
-  firePoints: []
+  bulletPrefab: {fileID: 8968026289633124402, guid: 0096d5a0aa5562c49b7ef0ebe130afb9, type: 3}
+  firePoints:
+  - {fileID: 6541737736571654962}
+  - {fileID: 2439182274860005073}
   fireRate: 0.5
 --- !u!1 &1569671561207998833
 GameObject:
