@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
-  moveSpeed: 20
+  moveSpeed: 0.05
   bulletPrefab: {fileID: 6449168085698916334, guid: bc3d90db9da63cd4e994523b6716c8cd, type: 3}
   fireRate: 0
   firePoints:

@@ -167,6 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  waveAmplitude: 1
-  waveFrequency: 2
+  waveAmplitude: 100
+  waveFrequency: 10
   timeDestroy: 3

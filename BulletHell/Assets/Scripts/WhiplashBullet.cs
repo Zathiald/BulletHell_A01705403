@@ -5,8 +5,8 @@ public class WhiplashBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float speed = 50f;                // Velocidad de movimiento hacia adelante
-    public float waveAmplitude = 1f;         // Amplitud de la onda
-    public float waveFrequency = 2f;         // Frecuencia de la onda
+    public float waveAmplitude = 1f;         // Amplitud de la onda (altitud máxima de la montaña)
+    public float waveFrequency = 2f;         // Frecuencia de la onda (cuánto tiempo tarda en completar un ciclo)
     public float timeDestroy = 3f;           // Tiempo después del cual destruir la bala
 
     private float elapsedTime = 0f;          // Tiempo transcurrido para el movimiento de la onda
@@ -25,10 +25,11 @@ public class WhiplashBullet : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             // Calcula el desplazamiento vertical con la función seno (onda)
+            // Esto hará que la bala se mueva hacia arriba y abajo como "montañas"
             float yOffset = Mathf.Sin(elapsedTime * waveFrequency) * waveAmplitude;
 
             // Aplica el movimiento hacia adelante (en Z) y el movimiento ondulado en Y
-            rb.velocity = new Vector3(0, yOffset, speed);  // Dirección de movimiento en 3D
+            rb.velocity = new Vector3(0, yOffset, -speed);  // Dirección de movimiento en 3D
 
             // Destruye la bala después de un tiempo determinado
             Destroy(gameObject, timeDestroy);
