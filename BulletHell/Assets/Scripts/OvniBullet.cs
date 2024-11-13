@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class OvniBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float speed = 50f;

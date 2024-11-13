@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1090751216533063295}
   - component: {fileID: 7200103866641091562}
   m_Layer: 0
-  m_Name: EnemyBullet
+  m_Name: UFOBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_doNotOverwriteTemplateMaterialProperties: 0
   m_startPos: {x: 0, y: 100, z: 0}
   m_endPos: {x: 0, y: 0, z: 0}
-  m_lineColor: {r: 1, g: 0.21641757, b: 0, a: 1}
+  m_lineColor: {r: 0.0010039806, g: 1, b: 0, a: 1}
   m_lineWidth: 20
   m_lightSaberFactor: 0.8
 --- !u!54 &5614802657325802488
