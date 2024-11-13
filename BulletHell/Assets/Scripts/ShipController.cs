@@ -24,6 +24,10 @@ public class ShipController : MonoBehaviour
     public float fireRate = 0.5f;       // Tiempo entre ráfagas de disparo (en segundos)
     private float fireCooldown = 0f;    // Temporizador para controlar la frecuencia de disparo
 
+    // Variables de vida del jugador
+    public float playerHealth = 100f;   // Vida inicial del jugador
+    public float damageAmount = 10f;    // Daño recibido por disparos enemigos
+
     void Start()
     {
         screenCenter.x = Screen.width * .5f;
@@ -98,5 +102,32 @@ public class ShipController : MonoBehaviour
         }
         trail.GetComponent<TrailRenderer>().emitting = state;
         activeForwardSpeed = activeForwardSpeed * boostSpeed;
+    }
+
+    // Detectar colisiones con proyectiles enemigos
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))  // Verifica si el objeto con el que colisiona tiene el tag "enemy"
+        {
+            TakeDamage(damageAmount);   // Llama a la función para reducir la vida
+        }
+    }
+
+    // Función para reducir la vida del jugador
+    void TakeDamage(float damage)
+    {
+        playerHealth -= damage;
+        if (playerHealth <= 0)
+        {
+            Die();  // Llama a la función de muerte si la vida llega a cero
+        }
+    }
+
+    // Función de muerte del jugador
+    void Die()
+    {
+        // Aquí puedes agregar efectos de muerte, reiniciar la escena, etc.
+        Debug.Log("Jugador muerto");
+        Destroy(gameObject);  // Destruye el objeto del jugador por ahora, puedes cambiar esto según tu necesidad
     }
 }

@@ -104,7 +104,7 @@ MonoBehaviour:
   m_startPos: {x: 0, y: 100, z: 0}
   m_endPos: {x: 0, y: 0, z: 0}
   m_lineColor: {r: 0.0010039806, g: 1, b: 0, a: 1}
-  m_lineWidth: 20
+  m_lineWidth: 50
   m_lightSaberFactor: 0.8
 --- !u!54 &5614802657325802488
 Rigidbody:
@@ -167,4 +167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  timeDestroy: 3
+  timeDestroy: 2
