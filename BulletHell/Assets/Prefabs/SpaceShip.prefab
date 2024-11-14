@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 178988965640033016}
   - component: {fileID: 428225665371510377}
+  - component: {fileID: 2492603129038379145}
   m_Layer: 0
   m_Name: SpaceShip
   m_TagString: Player
@@ -73,6 +74,29 @@ MonoBehaviour:
   fireRate: 0.5
   playerHealth: 120
   healthBarController: {fileID: 0}
+  playerRenderer: {fileID: 9132837480714345921}
+  originalMaterial: {fileID: 2100000, guid: 9003f59f5b9eff54ea66569f1bbfe305, type: 2}
+--- !u!65 &2492603129038379145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662087593436907586}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1569671561207998833
 GameObject:
   m_ObjectHideFlags: 0
@@ -5047,7 +5071,6 @@ GameObject:
   - component: {fileID: 8180578120914493110}
   - component: {fileID: 9132837480714345921}
   - component: {fileID: 7031141253403655789}
-  - component: {fileID: 1834013718842643449}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Enemy
@@ -5163,27 +5186,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!65 &1834013718842643449
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684193568200664035}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.051392414, y: 0.030531688, z: 0.034867465}
-  m_Center: {x: -0.00021228347, y: 0.00034974204, z: 0.005496056}
 --- !u!1 &2102169394194298423
 GameObject:
   m_ObjectHideFlags: 0

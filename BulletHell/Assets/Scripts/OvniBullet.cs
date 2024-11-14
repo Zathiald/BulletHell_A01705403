@@ -39,7 +39,7 @@ public class OvniBullet : MonoBehaviour
             var player = other.GetComponent<ShipController>();
             if (player != null)
             {
-                player.TakeDamage(damage);
+                player.TakeDamage(damage, Color.green);
                 Debug.Log("Atacado Jugador");
             }
             Destroy(gameObject); // Destruye la bala al impactar

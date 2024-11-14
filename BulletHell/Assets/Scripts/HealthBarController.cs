@@ -5,7 +5,7 @@ public class HealthBarController : MonoBehaviour
 {
     public Slider healthSlider; // Asigna aquí el Slider en el Inspector
     public Image healthFillImage; // Asigna aquí la imagen de relleno del slider en el Inspector
-    public float maxHealth = 100f;
+    public float maxHealth = 120f;
     private float currentHealth;
 
     void Start()
@@ -30,6 +30,7 @@ public class HealthBarController : MonoBehaviour
 
     private void UpdateHealthBar()
     {
+        // Cambiar el valor del Slider basándonos en la vida actual
         healthSlider.value = currentHealth / maxHealth;
 
         // Obtener el porcentaje de salud actual
@@ -51,7 +52,12 @@ public class HealthBarController : MonoBehaviour
             // Rojo cuando la vida está por debajo del 20%
             healthFillImage.color = Color.Lerp(Color.yellow, Color.red, (0.2f - healthPercentage) * 5);
         }
+
+        // Invertir la escala del relleno para que se llene hacia abajo
+        RectTransform fillRect = healthFillImage.GetComponent<RectTransform>();
+        fillRect.localScale = new Vector3(fillRect.localScale.x, -healthSlider.value, fillRect.localScale.z);
     }
 }
+
 
 

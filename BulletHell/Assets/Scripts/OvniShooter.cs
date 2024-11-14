@@ -15,14 +15,14 @@ public class OvniShooter : MonoBehaviour, IDamage
     private int currentFirePointIndex = 0; // Índice actual del punto de disparo
     public float health = 50f; // Vida del enemigo
     private Renderer enemyRenderer;  // Para acceder al Renderer del objeto
-    public Material originalMaterial; // Para guardar el material original
+    private Color originalColor; // Para guardar el color de emisión original
 
     void Start()
     {
         enemyRenderer = GetComponent<Renderer>();  // Obtener el Renderer del objeto
         if (enemyRenderer != null)
         {
-            originalMaterial = enemyRenderer.material;  // Guardar el material original
+            originalColor = enemyRenderer.material.GetColor("_Color");  // Guardar el color original
         }
 
         StartCoroutine(AutoShoot()); // Inicia la rutina de disparo
@@ -75,11 +75,8 @@ public class OvniShooter : MonoBehaviour, IDamage
         // Cambiar el color a rojo al recibir daño
         if (enemyRenderer != null)
         {
-            // Cambiar el color del material a rojo
-            enemyRenderer.material.color = Color.red;
-
-            // Llamar a la corutina para restaurar el color después de 1 segundo
-            StartCoroutine(ResetColor());
+            enemyRenderer.material.SetColor("_Color", Color.red);  // Cambia el color a rojo
+            StartCoroutine(ResetColor()); // Llama a la corutina para restaurar el color después de un tiempo
         }
 
         if (health <= 0)
@@ -90,14 +87,13 @@ public class OvniShooter : MonoBehaviour, IDamage
 
     IEnumerator ResetColor()
     {
-        // Espera 1 segundo
+        // Espera 0.5 segundos
         yield return new WaitForSeconds(0.5f);
 
-        // Restaurar el material original
-        if (enemyRenderer != null && originalMaterial != null)
+        // Restaurar el color original del material
+        if (enemyRenderer != null)
         {
-            // Restaurar el color original del material
-            enemyRenderer.material = originalMaterial;
+            enemyRenderer.material.SetColor("_Color", originalColor);
         }
     }
 

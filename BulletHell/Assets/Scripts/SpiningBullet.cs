@@ -38,7 +38,7 @@ public class SpiningBullet : MonoBehaviour
             var player = other.GetComponent<ShipController>();
             if (player != null)
             {
-                player.TakeDamage(damage);
+                player.TakeDamage(damage, new Color(0.5f, 0f, 0.5f));
                 Debug.Log("Atacado Jugador");
             }
             Destroy(gameObject); // Destruye la bala al impactar

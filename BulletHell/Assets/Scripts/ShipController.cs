@@ -27,12 +27,15 @@ public class ShipController : MonoBehaviour
     // Variables de vida del jugador
     public float playerHealth = 100f;   // Vida inicial del jugador
     public HealthBarController healthBarController;
+    public Renderer playerRenderer;  // Para acceder al Renderer del objeto
+    public Material originalMaterial; // Para guardar el material original
 
     void Start()
     {
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
         Cursor.lockState = CursorLockMode.Confined;
+        healthBarController.TakeDamage(120);
     }
 
     void Update()
@@ -105,14 +108,40 @@ public class ShipController : MonoBehaviour
     }
 
     // Función para reducir la vida del jugador
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Color color)
     {
         Debug.Log("Danio recibido");
         playerHealth -= damage;
         healthBarController.TakeDamage(damage);
+        Debug.Log("Jugador dañado. Vida restante: " + playerHealth);
+
+        if (playerRenderer != null)
+        {
+            // Cambiar el color del material a rojo
+            playerRenderer.materials[1].SetColor("_Color", color);
+
+            // Llamar a la corutina para restaurar el color después de 1 segundo
+            StartCoroutine(ResetColor());
+        }
+
         if (playerHealth <= 0)
         {
             Die();  // Llama a la función de muerte si la vida llega a cero
+        }
+    }
+
+    IEnumerator ResetColor()
+    {
+        // Espera 1 segundo
+        yield return new WaitForSeconds(0.5f);
+
+        // Restaurar el material original del segundo material
+        if (playerRenderer != null && originalMaterial != null)
+        {
+            // Restaurar el material original (si lo hemos guardado)
+            Material[] materials = playerRenderer.materials; // Obtener los materiales actuales
+            materials[1] = originalMaterial; // Cambiar el material en el índice 1
+            playerRenderer.materials = materials; // Asignar de nuevo el arreglo de materiales
         }
     }
 

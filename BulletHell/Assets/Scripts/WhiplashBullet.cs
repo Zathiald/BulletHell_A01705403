@@ -50,7 +50,7 @@ public class WhiplashBullet : MonoBehaviour
             var player = other.GetComponent<ShipController>();
             if (player != null)
             {
-                player.TakeDamage(damage);
+                player.TakeDamage(damage, Color.blue);
                 Debug.Log("Atacado Jugador");
             }
             Destroy(gameObject); // Destruye la bala al impactar
