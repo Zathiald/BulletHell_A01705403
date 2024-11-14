@@ -10,6 +10,7 @@ public class WhiplashBullet : MonoBehaviour
     public float timeDestroy = 3f;           // Tiempo después del cual destruir la bala
 
     private float elapsedTime = 0f;          // Tiempo transcurrido para el movimiento de la onda
+    public float damage = 10f; // Daño que causa la bala
 
     void Start()
     {
@@ -37,6 +38,22 @@ public class WhiplashBullet : MonoBehaviour
         else
         {
             Debug.LogError("Rigidbody no encontrado en la bala.");
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Colisión del enemigo con: " + other.gameObject.name);  // Ver qué objeto está colisionando
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Colisión con jugador"); 
+            var player = other.GetComponent<ShipController>();
+            if (player != null)
+            {
+                player.TakeDamage(damage);
+                Debug.Log("Atacado Jugador");
+            }
+            Destroy(gameObject); // Destruye la bala al impactar
         }
     }
 }

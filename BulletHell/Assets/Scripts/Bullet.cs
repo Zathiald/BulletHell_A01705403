@@ -7,13 +7,11 @@ public class Bullet : MonoBehaviour
     private Rigidbody rb;
     public float speed = 50f;
     public float timeDestroy = 3f;
+    public float damage = 10f; // Daño que causa la bala
 
     void Start()
     {
-        // Rota la bala 90 grados en el eje X para que visualmente esté orientada correctamente
         transform.Rotate(90f, 0f, 0f);
-
-        // Inicializa el Rigidbody
         rb = GetComponent<Rigidbody>();
     }
 
@@ -21,15 +19,30 @@ public class Bullet : MonoBehaviour
     {
         if (rb != null) 
         {
-            // Aplica la velocidad hacia adelante en función de la rotación del objeto (ya rotado en X)
-            rb.velocity = transform.up * speed; // Usa 'up' para moverlo según la rotación ajustada
+            rb.velocity = transform.up * speed;
         }
         else
         {
             Debug.LogError("Rigidbody no encontrado en la bala.");
         }
         
-        Destroy(gameObject, timeDestroy); // Destruye la bala después de 'timeDestroy' segundos
+        Destroy(gameObject, timeDestroy);
     }
-}
 
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Colisión del jugador con: " + other.gameObject.name);  // Ver qué objeto está colisionando
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("Colisión con enemigo");  
+            var enemy = other.GetComponent<IDamage>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+                Debug.Log("Atacado Enemigo");
+            }
+            Destroy(gameObject); // Destruye la bala al impactar
+        }
+    }
+
+}

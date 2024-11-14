@@ -26,7 +26,7 @@ public class ShipController : MonoBehaviour
 
     // Variables de vida del jugador
     public float playerHealth = 100f;   // Vida inicial del jugador
-    public float damageAmount = 10f;    // Daño recibido por disparos enemigos
+    public HealthBarController healthBarController;
 
     void Start()
     {
@@ -104,19 +104,12 @@ public class ShipController : MonoBehaviour
         activeForwardSpeed = activeForwardSpeed * boostSpeed;
     }
 
-    // Detectar colisiones con proyectiles enemigos
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))  // Verifica si el objeto con el que colisiona tiene el tag "enemy"
-        {
-            TakeDamage(damageAmount);   // Llama a la función para reducir la vida
-        }
-    }
-
     // Función para reducir la vida del jugador
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
+        Debug.Log("Danio recibido");
         playerHealth -= damage;
+        healthBarController.TakeDamage(damage);
         if (playerHealth <= 0)
         {
             Die();  // Llama a la función de muerte si la vida llega a cero

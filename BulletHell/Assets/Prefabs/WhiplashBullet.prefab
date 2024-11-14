@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1929024652232128990}
   m_Layer: 0
   m_Name: WhiplashBullet
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,6 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 70
-  waveAmplitude: 100
+  waveAmplitude: 110
   waveFrequency: 10
   timeDestroy: 5

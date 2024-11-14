@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 428225665371510377}
   m_Layer: 0
   m_Name: SpaceShip
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,8 +71,8 @@ MonoBehaviour:
   - {fileID: 6541737736571654962}
   - {fileID: 2439182274860005073}
   fireRate: 0.5
-  playerHealth: 100
-  damageAmount: 10
+  playerHealth: 120
+  healthBarController: {fileID: 0}
 --- !u!1 &1569671561207998833
 GameObject:
   m_ObjectHideFlags: 0
@@ -5049,8 +5049,8 @@ GameObject:
   - component: {fileID: 7031141253403655789}
   - component: {fileID: 1834013718842643449}
   m_Layer: 0
-  m_Name: pCube16
-  m_TagString: Untagged
+  m_Name: Spaceship
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

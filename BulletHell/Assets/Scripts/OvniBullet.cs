@@ -7,6 +7,7 @@ public class OvniBullet : MonoBehaviour
     private Rigidbody rb;
     public float speed = 50f;
     public float timeDestroy = 3f;
+    public float damage = 10f; // Daño que causa la bala
 
     void Start()
     {
@@ -27,6 +28,22 @@ public class OvniBullet : MonoBehaviour
         }
         
         Destroy(gameObject, timeDestroy); // Destruye la bala después de 'timeDestroy' segundos
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Colisión del enemigo con: " + other.gameObject.name);  // Ver qué objeto está colisionando
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Colisión con jugador"); 
+            var player = other.GetComponent<ShipController>();
+            if (player != null)
+            {
+                player.TakeDamage(damage);
+                Debug.Log("Atacado Jugador");
+            }
+            Destroy(gameObject); // Destruye la bala al impactar
+        }
     }
 }
 

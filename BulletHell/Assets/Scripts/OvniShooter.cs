@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class OvniShooter : MonoBehaviour
+public class OvniShooter : MonoBehaviour, IDamage
 {
     public float circleRadius = 5f;      // Radio del movimiento circular
     public float circleSpeed = 1f;       // Velocidad del movimiento circular
@@ -13,9 +13,18 @@ public class OvniShooter : MonoBehaviour
 
     private float angle = 0f;
     private int currentFirePointIndex = 0; // Índice actual del punto de disparo
+    public float health = 50f; // Vida del enemigo
+    private Renderer enemyRenderer;  // Para acceder al Renderer del objeto
+    public Material originalMaterial; // Para guardar el material original
 
     void Start()
     {
+        enemyRenderer = GetComponent<Renderer>();  // Obtener el Renderer del objeto
+        if (enemyRenderer != null)
+        {
+            originalMaterial = enemyRenderer.material;  // Guardar el material original
+        }
+
         StartCoroutine(AutoShoot()); // Inicia la rutina de disparo
     }
 
@@ -57,5 +66,44 @@ public class OvniShooter : MonoBehaviour
         // Avanza al siguiente punto de disparo en orden
         currentFirePointIndex = (currentFirePointIndex + 1) % firePoints.Length;
     }
-}
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        Debug.Log("Enemigo dañado. Vida restante: " + health);
+
+        // Cambiar el color a rojo al recibir daño
+        if (enemyRenderer != null)
+        {
+            // Cambiar el color del material a rojo
+            enemyRenderer.material.color = Color.red;
+
+            // Llamar a la corutina para restaurar el color después de 1 segundo
+            StartCoroutine(ResetColor());
+        }
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    IEnumerator ResetColor()
+    {
+        // Espera 1 segundo
+        yield return new WaitForSeconds(0.5f);
+
+        // Restaurar el material original
+        if (enemyRenderer != null && originalMaterial != null)
+        {
+            // Restaurar el color original del material
+            enemyRenderer.material = originalMaterial;
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Enemigo destruido");
+        Destroy(gameObject);
+    }
+}

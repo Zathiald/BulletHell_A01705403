@@ -294,9 +294,10 @@ GameObject:
   - component: {fileID: 6757686107536249046}
   - component: {fileID: 2576415862774042307}
   - component: {fileID: 4286441755565734729}
+  - component: {fileID: 608729742509355248}
   m_Layer: 0
   m_Name: UFO
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -395,6 +396,8 @@ MonoBehaviour:
   - {fileID: 1353578261544885524}
   - {fileID: 5886824930275862858}
   - {fileID: 9202828363954761446}
+  health: 50
+  originalMaterial: {fileID: 2100000, guid: 348cd01030a23c44793927c3f15b70c2, type: 2}
 --- !u!65 &4286441755565734729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -410,12 +413,39 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02, y: 0.017483778, z: 0.008660879}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.017457716, y: 0.013063863, z: 0.008759293}
+  m_Center: {x: -0.001271141, y: -0.0022099516, z: 0.00004921076}
+--- !u!54 &608729742509355248
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8681234625855812699}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &8747775250091808297
 GameObject:
   m_ObjectHideFlags: 0
