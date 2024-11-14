@@ -11,6 +11,8 @@ public class HealthBarController : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = maxHealth; // Asegura que empiece completamente relleno
         UpdateHealthBar();
     }
 
@@ -30,34 +32,33 @@ public class HealthBarController : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        // Cambiar el valor del Slider basándonos en la vida actual
-        healthSlider.value = currentHealth / maxHealth;
-
-        // Obtener el porcentaje de salud actual
-        float healthPercentage = currentHealth / maxHealth;
+        healthSlider.value = currentHealth; // Ajusta el valor del Slider basado en la vida actual
 
         // Cambiar el color de la barra de vida según el porcentaje de salud
+        float healthPercentage = currentHealth / maxHealth;
+
         if (healthPercentage > 0.5f)
         {
             // Azul verdoso cuando la vida está por encima del 50%
-            healthFillImage.color = Color.Lerp(Color.green, Color.cyan, 1 - (healthPercentage - 0.5f) * 2);
+            healthFillImage.color = Color.Lerp(new Color(0.0f, 0.5f, 0.5f), Color.cyan, (healthPercentage - 0.5f) * 2);
         }
-        else if (healthPercentage > 0.2f)
+        else if (healthPercentage > 0.25f)
         {
-            // Amarillo cuando la vida está entre el 50% y el 20%
-            healthFillImage.color = Color.Lerp(Color.green, Color.yellow, (0.5f - healthPercentage) * 2);
+            // Amarillo cuando la vida está entre el 25% y el 50%
+            healthFillImage.color = Color.Lerp(Color.yellow, new Color(0.5f, 1.0f, 0.0f), (healthPercentage - 0.25f) * 4);
         }
         else
         {
-            // Rojo cuando la vida está por debajo del 20%
-            healthFillImage.color = Color.Lerp(Color.yellow, Color.red, (0.2f - healthPercentage) * 5);
+            // Rojo cuando la vida está por debajo del 25%
+            healthFillImage.color = Color.Lerp(Color.red, Color.yellow, healthPercentage * 4);
         }
 
-        // Invertir la escala del relleno para que se llene hacia abajo
+        // Invertir la escala verticalmente para que se vacíe hacia abajo
         RectTransform fillRect = healthFillImage.GetComponent<RectTransform>();
-        fillRect.localScale = new Vector3(fillRect.localScale.x, -healthSlider.value, fillRect.localScale.z);
+        fillRect.localScale = new Vector3(fillRect.localScale.x, healthPercentage, fillRect.localScale.z);
     }
 }
+
 
 
 

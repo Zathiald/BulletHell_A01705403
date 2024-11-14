@@ -17,6 +17,9 @@ public class OvniShooter : MonoBehaviour, IDamage
     private Renderer enemyRenderer;  // Para acceder al Renderer del objeto
     private Color originalColor; // Para guardar el color de emisión original
 
+    public AudioClip hitSound;
+    private AudioSource audioSource;
+
     void Start()
     {
         enemyRenderer = GetComponent<Renderer>();  // Obtener el Renderer del objeto
@@ -26,6 +29,10 @@ public class OvniShooter : MonoBehaviour, IDamage
         }
 
         StartCoroutine(AutoShoot()); // Inicia la rutina de disparo
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = hitSound;
+        audioSource.playOnAwake = false;
     }
 
     void Update()
@@ -77,6 +84,11 @@ public class OvniShooter : MonoBehaviour, IDamage
         {
             enemyRenderer.material.SetColor("_Color", Color.red);  // Cambia el color a rojo
             StartCoroutine(ResetColor()); // Llama a la corutina para restaurar el color después de un tiempo
+        }
+
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
         }
 
         if (health <= 0)

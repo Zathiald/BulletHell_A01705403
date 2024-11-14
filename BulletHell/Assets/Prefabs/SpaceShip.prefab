@@ -72,6 +72,9 @@ MonoBehaviour:
   - {fileID: 6541737736571654962}
   - {fileID: 2439182274860005073}
   fireRate: 0.5
+  fireSound: {fileID: 8300000, guid: c25ce773efac26f489d70925156c188c, type: 3}
+  hitSound: {fileID: 8300000, guid: 7ce40922bdb9daa4b9d78505adbed609, type: 3}
+  gameOverSound: {fileID: 8300000, guid: 71549cc097af2c0489658cfdc2ba0312, type: 3}
   playerHealth: 120
   healthBarController: {fileID: 0}
   playerRenderer: {fileID: 9132837480714345921}

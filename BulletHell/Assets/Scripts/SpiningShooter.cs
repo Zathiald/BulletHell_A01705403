@@ -14,11 +14,18 @@ public class SpiningShooter : MonoBehaviour, IDamage
     private Renderer enemyRenderer;  // Para acceder al Renderer del objeto
     public Material originalMaterial; // Para guardar el material original
 
+    public AudioClip hitSound;
+    private AudioSource audioSource;
+
     void Start()
     {
         // Obtener el componente Renderer del objeto
         enemyRenderer = GetComponent<Renderer>();
         StartCoroutine(AutoShoot());
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = hitSound;
+        audioSource.playOnAwake = false;
     }
 
     void Update()
@@ -60,6 +67,11 @@ public class SpiningShooter : MonoBehaviour, IDamage
 
             // Llamar a la corutina para restaurar el color después de 1 segundo
             StartCoroutine(ResetColor());
+        }
+
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
         }
 
         if (health <= 0)

@@ -15,10 +15,17 @@ public class WhiplashShooter : MonoBehaviour, IDamage
     private Renderer enemyRenderer;     // Para acceder al Renderer del objeto
     public Material originalMaterial;   // Para guardar el material original
 
+    public AudioClip hitSound;
+    private AudioSource audioSource;
+
     void Start()
     {
         enemyRenderer = GetComponent<Renderer>();
         StartCoroutine(AutoShoot()); // Inicia la rutina de disparo automático
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = hitSound;
+        audioSource.playOnAwake = false;
     }
 
     void Update()
@@ -79,6 +86,11 @@ public class WhiplashShooter : MonoBehaviour, IDamage
 
             // Llamar a la corutina para restaurar el color después de 1 segundo
             StartCoroutine(ResetColor());
+        }
+
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
         }
 
         if (health <= 0)

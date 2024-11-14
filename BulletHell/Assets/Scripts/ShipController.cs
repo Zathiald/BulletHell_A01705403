@@ -19,16 +19,23 @@ public class ShipController : MonoBehaviour
     public bool canMove = true;
 
     // Variables de disparo
-    public GameObject bulletPrefab;     // Prefab de la bala
-    public Transform[] firePoints;      // Puntos de disparo
-    public float fireRate = 0.5f;       // Tiempo entre ráfagas de disparo (en segundos)
-    private float fireCooldown = 0f;    // Temporizador para controlar la frecuencia de disparo
+    public GameObject bulletPrefab;
+    public Transform[] firePoints;
+    public float fireRate = 0.5f;
+    private float fireCooldown = 0f;
+
+    // Clip de audio de disparo
+    public AudioClip fireSound;
+    public AudioClip hitSound;
+    public AudioClip gameOverSound;
+    private AudioSource audioSource;
+    public AudioSource backgroundMusic;
 
     // Variables de vida del jugador
-    public float playerHealth = 100f;   // Vida inicial del jugador
+    public float playerHealth = 100f;
     public HealthBarController healthBarController;
-    public Renderer playerRenderer;  // Para acceder al Renderer del objeto
-    public Material originalMaterial; // Para guardar el material original
+    public Renderer playerRenderer;
+    public Material originalMaterial;
 
     void Start()
     {
@@ -36,6 +43,11 @@ public class ShipController : MonoBehaviour
         screenCenter.y = Screen.height * .5f;
         Cursor.lockState = CursorLockMode.Confined;
         healthBarController.TakeDamage(120);
+
+        // Configura el componente de audio
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = fireSound;
+        audioSource.playOnAwake = false;
     }
 
     void Update()
@@ -79,7 +91,7 @@ public class ShipController : MonoBehaviour
         if ((Input.GetKey(KeyCode.LeftShift) || Input.GetMouseButton(1)) && fireCooldown <= 0f)
         {
             FireAllBullets();
-            fireCooldown = fireRate;  // Reinicia el temporizador
+            fireCooldown = fireRate;
         }
     }
 
@@ -88,6 +100,12 @@ public class ShipController : MonoBehaviour
         foreach (Transform firePoint in firePoints)
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        }
+
+        // Reproduce el sonido de disparo
+        if (audioSource != null && fireSound != null)
+        {
+            audioSource.PlayOneShot(fireSound);
         }
     }
 
@@ -107,7 +125,6 @@ public class ShipController : MonoBehaviour
         activeForwardSpeed = activeForwardSpeed * boostSpeed;
     }
 
-    // Función para reducir la vida del jugador
     public void TakeDamage(float damage, Color color)
     {
         Debug.Log("Danio recibido");
@@ -117,39 +134,51 @@ public class ShipController : MonoBehaviour
 
         if (playerRenderer != null)
         {
-            // Cambiar el color del material a rojo
             playerRenderer.materials[1].SetColor("_Color", color);
-
-            // Llamar a la corutina para restaurar el color después de 1 segundo
             StartCoroutine(ResetColor());
+        }
+
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
         }
 
         if (playerHealth <= 0)
         {
-            Die();  // Llama a la función de muerte si la vida llega a cero
+            Die();
         }
     }
 
     IEnumerator ResetColor()
     {
-        // Espera 1 segundo
         yield return new WaitForSeconds(0.5f);
 
-        // Restaurar el material original del segundo material
         if (playerRenderer != null && originalMaterial != null)
         {
-            // Restaurar el material original (si lo hemos guardado)
-            Material[] materials = playerRenderer.materials; // Obtener los materiales actuales
-            materials[1] = originalMaterial; // Cambiar el material en el índice 1
-            playerRenderer.materials = materials; // Asignar de nuevo el arreglo de materiales
+            Material[] materials = playerRenderer.materials;
+            materials[1] = originalMaterial;
+            playerRenderer.materials = materials;
         }
     }
 
-    // Función de muerte del jugador
     void Die()
     {
-        // Aquí puedes agregar efectos de muerte, reiniciar la escena, etc.
         Debug.Log("Jugador muerto");
-        Destroy(gameObject);  // Destruye el objeto del jugador por ahora, puedes cambiar esto según tu necesidad
+        Destroy(gameObject);
+
+        if (backgroundMusic != null)
+        {
+            // Detener la música de fondo
+            backgroundMusic.Stop();
+        }
+
+        if (audioSource != null && gameOverSound != null)
+        {
+            // Reproducir el sonido de "Game Over" en el AudioSource para efectos de sonido
+            backgroundMusic.PlayOneShot(gameOverSound);
+        }
+
+        GameObject.FindObjectOfType<GameOverEffect>().TriggerGameOver();
     }
 }
+

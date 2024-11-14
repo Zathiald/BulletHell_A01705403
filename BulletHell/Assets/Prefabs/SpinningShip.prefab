@@ -145,6 +145,7 @@ MonoBehaviour:
   - {fileID: 2345912819314968169}
   health: 50
   originalMaterial: {fileID: 2100000, guid: 750859acb5217e140b28a28f79787015, type: 2}
+  hitSound: {fileID: 8300000, guid: 10059b65e11fd30488386a62c589c40f, type: 3}
 --- !u!54 &3136694645025149006
 Rigidbody:
   m_ObjectHideFlags: 0

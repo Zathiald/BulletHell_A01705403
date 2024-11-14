@@ -216,8 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3bb65e13b2baaa45977903746b156d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 0}
+  pathPoints: []
   moveSpeed: 0.25
   bulletPrefab: {fileID: 6449168085698916334, guid: bc3d90db9da63cd4e994523b6716c8cd, type: 3}
   fireRate: 0.05
@@ -226,6 +225,7 @@ MonoBehaviour:
   - {fileID: 2687905833951654902}
   health: 50
   originalMaterial: {fileID: 2100000, guid: d79a83adef48e0c41bf93a4d0491ac1d, type: 2}
+  hitSound: {fileID: 8300000, guid: 10059b65e11fd30488386a62c589c40f, type: 3}
 --- !u!54 &1246657035685033891
 Rigidbody:
   m_ObjectHideFlags: 0
