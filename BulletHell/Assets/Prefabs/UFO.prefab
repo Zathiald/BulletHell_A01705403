@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5ea0e53aa74f743aa62646e72d2f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleRadius: 5
+  circleRadius: 3
   circleSpeed: 5
   rotationSpeed: 300
   bulletPrefab: {fileID: 2782948589138781857, guid: 3e4e095c8c8ecc644bc6cbadd74f3898, type: 3}

@@ -23,13 +23,6 @@ public class HealthBarController : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void Heal(float amount)
-    {
-        currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        UpdateHealthBar();
-    }
-
     private void UpdateHealthBar()
     {
         healthSlider.value = currentHealth; // Ajusta el valor del Slider basado en la vida actual
@@ -37,20 +30,15 @@ public class HealthBarController : MonoBehaviour
         // Cambiar el color de la barra de vida según el porcentaje de salud
         float healthPercentage = currentHealth / maxHealth;
 
-        if (healthPercentage > 0.5f)
-        {
-            // Azul verdoso cuando la vida está por encima del 50%
-            healthFillImage.color = Color.Lerp(new Color(0.0f, 0.5f, 0.5f), Color.cyan, (healthPercentage - 0.5f) * 2);
-        }
-        else if (healthPercentage > 0.25f)
+        if ( healthPercentage < 0.5f)
         {
             // Amarillo cuando la vida está entre el 25% y el 50%
-            healthFillImage.color = Color.Lerp(Color.yellow, new Color(0.5f, 1.0f, 0.0f), (healthPercentage - 0.25f) * 4);
+            healthFillImage.color = Color.yellow;
         }
-        else
+        if (healthPercentage < 0.25f)
         {
             // Rojo cuando la vida está por debajo del 25%
-            healthFillImage.color = Color.Lerp(Color.red, Color.yellow, healthPercentage * 4);
+            healthFillImage.color = Color.red;
         }
 
         // Invertir la escala verticalmente para que se vacíe hacia abajo

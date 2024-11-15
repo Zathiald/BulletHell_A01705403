@@ -8,7 +8,7 @@ public class GameOverEffect : MonoBehaviour
     public Image fadeImage;            // Imagen negra que se usa para oscurecer la pantalla
     public TextMeshProUGUI gameOverText; // Texto "GAME OVER" (usa Text si no estás usando TextMeshPro)
     public float fadeDuration = 1.5f;  // Duración del efecto de oscurecimiento
-    public float textMoveDuration = 1f; // Duración de la animación de movimiento del texto
+    public float textMoveDuration = 2f; // Duración de la animación de movimiento del texto
 
     private void Start()
     {

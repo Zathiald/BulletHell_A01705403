@@ -5,16 +5,16 @@ public class WhiplashBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float speed = 50f;                // Velocidad de movimiento hacia adelante
-    public float waveAmplitude = 1f;         // Amplitud de la onda (altitud máxima de la montaña)
+    public float waveAmplitude = 1f;         // Amplitud de la onda (altura de la "montaña")
     public float waveFrequency = 2f;         // Frecuencia de la onda (cuánto tiempo tarda en completar un ciclo)
     public float timeDestroy = 3f;           // Tiempo después del cual destruir la bala
 
     private float elapsedTime = 0f;          // Tiempo transcurrido para el movimiento de la onda
-    public float damage = 10f; // Daño que causa la bala
+    public float damage = 10f;               // Daño que causa la bala
 
     void Start()
     {
-        transform.Rotate(90f, 0f, 0f);      // Asegura que la bala esté orientada correctamente
+        transform.Rotate(90f, 0f, 0f);       // Asegura que la bala esté orientada correctamente
         rb = GetComponent<Rigidbody>();
     }
 
@@ -22,15 +22,18 @@ public class WhiplashBullet : MonoBehaviour
     {
         if (rb != null)
         {
-            // Actualiza el tiempo transcurrido para el movimiento en onda
+            // Actualiza el tiempo transcurrido para el movimiento en onda, pero con un ciclo repetitivo
             elapsedTime += Time.deltaTime;
 
-            // Calcula el desplazamiento vertical con la función seno (onda)
-            // Esto hará que la bala se mueva hacia arriba y abajo como "montañas"
-            float yOffset = Mathf.Sin(elapsedTime * waveFrequency) * waveAmplitude;
+            // Mantén `elapsedTime` dentro de un ciclo utilizando Mathf.Repeat
+            float repeatedTime = Mathf.Repeat(elapsedTime * waveFrequency, Mathf.PI * 2);
 
-            // Aplica el movimiento hacia adelante (en Z) y el movimiento ondulado en Y
-            rb.velocity = new Vector3(0, yOffset, -speed);  // Dirección de movimiento en 3D
+            // Calcula el desplazamiento vertical con la función seno para hacer un ciclo constante
+            float yOffset = Mathf.Sin(repeatedTime) * waveAmplitude;
+
+            // Aplica el movimiento hacia adelante y el movimiento ondulado en Y
+            Vector3 forwardMovement = transform.up * speed;
+            rb.velocity = new Vector3(forwardMovement.x, yOffset, forwardMovement.z);
 
             // Destruye la bala después de un tiempo determinado
             Destroy(gameObject, timeDestroy);
