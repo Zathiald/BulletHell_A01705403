@@ -6,8 +6,8 @@ using Cinemachine;
 public class EnemyManager : MonoBehaviour
 {
     public List<GameObject> ufos;
-    public List<GameObject> tornadoes;
     public List<GameObject> whiplashes;
+    public List<GameObject> tornadoes;
     public List<GameObject> focusObjects; // Lista de objetos especiales de enfoque
     public CinemachineVirtualCamera virtualCamera; // Referencia a la Cinemachine Virtual Camera
     public Transform player; // Referencia al jugador
@@ -18,24 +18,24 @@ public class EnemyManager : MonoBehaviour
     {
         // Activa solo los UFOs al inicio
         ActivateEnemies(ufos, true);
-        ActivateEnemies(tornadoes, false);
         ActivateEnemies(whiplashes, false);
+        ActivateEnemies(tornadoes, false);
     }
 
     void Update()
     {
         // Comprueba si todos los UFOs han sido destruidos
-        if (ufos.Count == 0 && tornadoes.Count > 0 && !tornadoes[0].activeSelf)
-        {
-            StartCoroutine(FocusAndDestroyObject());
-            ActivateEnemies(tornadoes, true);
-        }
-
-        // Comprueba si todos los Tornados han sido destruidos
-        if (tornadoes.Count == 0 && whiplashes.Count > 0 && !whiplashes[0].activeSelf)
+        if (ufos.Count == 0 && whiplashes.Count > 0 && !whiplashes[0].activeSelf)
         {
             StartCoroutine(FocusAndDestroyObject());
             ActivateEnemies(whiplashes, true);
+        }
+
+        // Comprueba si todos los Whiplash han sido destruidos
+        if (whiplashes.Count == 0 && tornadoes.Count > 0 && !tornadoes[0].activeSelf)
+        {
+            StartCoroutine(FocusAndDestroyObject());
+            ActivateEnemies(tornadoes, true);
         }
     }
 
@@ -57,13 +57,13 @@ public class EnemyManager : MonoBehaviour
         {
             ufos.Remove(enemy);
         }
-        else if (tornadoes.Contains(enemy))
-        {
-            tornadoes.Remove(enemy);
-        }
         else if (whiplashes.Contains(enemy))
         {
             whiplashes.Remove(enemy);
+        }
+        else if (tornadoes.Contains(enemy))
+        {
+            tornadoes.Remove(enemy);
         }
     }
 
@@ -80,10 +80,10 @@ public class EnemyManager : MonoBehaviour
 
                 yield return new WaitForSeconds(1f); // Espera un momento antes de destruir el objeto
 
-                 // Destruye el objeto especial
+                // Destruye el objeto especial
                 Destroy(focusObject);
 
-                yield return new WaitForSeconds(1f); // Espera un momento antes de destruir el objeto
+                yield return new WaitForSeconds(0.5f); // Espera un momento antes de destruir el objeto
 
                 // Vuelve a enfocar al jugador
                 virtualCamera.LookAt = player;
@@ -94,4 +94,3 @@ public class EnemyManager : MonoBehaviour
         }
     }
 }
-
