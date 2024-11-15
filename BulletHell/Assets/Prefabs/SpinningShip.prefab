@@ -133,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b9d9f1aa78a474aafedb02bf066d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 50
+  rotationSpeed: 70
   bulletPrefab: {fileID: 726262522130735890, guid: 0da595aede963474b82278c9bc8d883d, type: 3}
-  fireRate: 0.05
+  fireRate: 0.025
   firePoints:
   - {fileID: 4472885931432617770}
   - {fileID: 2417625050932812913}
@@ -146,6 +146,7 @@ MonoBehaviour:
   health: 50
   originalMaterial: {fileID: 2100000, guid: 750859acb5217e140b28a28f79787015, type: 2}
   hitSound: {fileID: 8300000, guid: 10059b65e11fd30488386a62c589c40f, type: 3}
+  enemyManager: {fileID: 0}
 --- !u!54 &3136694645025149006
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -75,6 +75,7 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: c25ce773efac26f489d70925156c188c, type: 3}
   hitSound: {fileID: 8300000, guid: 7ce40922bdb9daa4b9d78505adbed609, type: 3}
   gameOverSound: {fileID: 8300000, guid: 71549cc097af2c0489658cfdc2ba0312, type: 3}
+  backgroundMusic: {fileID: 0}
   playerHealth: 120
   healthBarController: {fileID: 0}
   playerRenderer: {fileID: 9132837480714345921}
@@ -94,12 +95,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.425635, y: 1.7053835, z: 8.416121}
+  m_Center: {x: 0.0061705112, y: 0.90920293, z: 0.92899525}
 --- !u!1 &1569671561207998833
 GameObject:
   m_ObjectHideFlags: 0

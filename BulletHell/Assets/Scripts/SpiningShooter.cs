@@ -16,6 +16,7 @@ public class SpiningShooter : MonoBehaviour, IDamage
 
     public AudioClip hitSound;
     private AudioSource audioSource;
+    public EnemyManager enemyManager;
 
     void Start()
     {
@@ -99,6 +100,7 @@ public class SpiningShooter : MonoBehaviour, IDamage
     void Die()
     {
         Debug.Log("Enemigo destruido");
+        enemyManager.OnEnemyDestroyed(gameObject);
         Destroy(gameObject);
     }
 }

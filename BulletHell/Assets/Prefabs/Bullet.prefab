@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   timeDestroy: 1
-  damage: 5
+  damage: 10
 --- !u!54 &4939977864555659519
 Rigidbody:
   m_ObjectHideFlags: 0
