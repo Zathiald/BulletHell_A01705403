@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Boss : MonoBehaviour,IDamage
+public class Boss : MonoBehaviour, IDamage
 {
     public float rotationSpeed = 100f;
     public float rotationDuration = 5f;
@@ -15,12 +15,29 @@ public class Boss : MonoBehaviour,IDamage
     public Renderer objectRenderer;
     private float currentRotationSpeed;
     private bool isAnimating = false;
-    public float health = 50f; 
+    private bool isRotating = false;
+    public float health = 50f;
+    private float maxHealth = 50f;
     public AudioClip hitSound;
     private AudioSource audioSource;
 
+    [Header("Firepoints and Prefabs")]
+    public Transform[] firePoints1;
+    public Transform[] firePoints2;
+    public Transform[] firePoints3;
+    public GameObject prefab1;
+    public GameObject prefab2;
+    public GameObject prefab3;
+
+    public float fireIntervalPrefab1 = 2f; // Intervalo para prefab1
+    public float fireFramePrefab2And3 = 0.5f; // Intervalo entre disparos de prefab2 y prefab3
+
     void Start()
     {
+        isAnimating = false;
+        isRotating = false;
+        maxHealth = health;
+
         if (objectRenderer != null)
             originalColor = objectRenderer.material.color;
 
@@ -44,6 +61,9 @@ public class Boss : MonoBehaviour,IDamage
     private IEnumerator SpinObject()
     {
         isAnimating = true;
+        isRotating = true;
+        StartCoroutine(FireContinuously(firePoints1, prefab1, fireIntervalPrefab1)); // Prefab1
+        StartCoroutine(ManageFirePrefab2And3()); // Prefab2 y Prefab3
         float timer = 0f;
 
         while (timer < rotationDuration)
@@ -64,6 +84,7 @@ public class Boss : MonoBehaviour,IDamage
     private IEnumerator TiltObject()
     {
         isAnimating = true;
+        isRotating = false;
         Quaternion targetRotation = Quaternion.Euler(tiltAngle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
@@ -78,6 +99,7 @@ public class Boss : MonoBehaviour,IDamage
     private IEnumerator BlinkAndReset()
     {
         isAnimating = true;
+        isRotating = false;
         float blinkTimer = 0f;
         bool isVisible = true;
 
@@ -123,6 +145,51 @@ public class Boss : MonoBehaviour,IDamage
         if (health <= 0)
         {
             Die();
+        }
+    }
+
+    private IEnumerator FireContinuously(Transform[] firePoints, GameObject prefab, float interval)
+    {
+        while (true)
+        {
+            if (isRotating)
+            {
+                FireFromPoints(firePoints, prefab);
+                yield return new WaitForSeconds(interval);
+            }
+            else
+            {
+                yield return null; // Espera a que el objeto esté girando
+            }
+        }
+    }
+
+    private IEnumerator ManageFirePrefab2And3()
+    {
+        while (true)
+        {
+            if (health <= 0.75f * maxHealth)
+            {
+                StartCoroutine(FireContinuously(firePoints2, prefab2, fireFramePrefab2And3));
+            }
+
+            if (health <= 0.5f * maxHealth)
+            {
+                StartCoroutine(FireContinuously(firePoints3, prefab3, fireFramePrefab2And3));
+            }
+
+            yield return null; // Verificar las condiciones cada frame
+        }
+    }
+
+    private void FireFromPoints(Transform[] firePoints, GameObject prefab)
+    {
+        foreach (var firePoint in firePoints)
+        {
+            if (firePoint != null && prefab != null)
+            {
+                Instantiate(prefab, firePoint.position, firePoint.rotation);
+            }
         }
     }
 

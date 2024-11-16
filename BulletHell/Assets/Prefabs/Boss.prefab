@@ -1001,38 +1001,26 @@ MonoBehaviour:
   decelerationTime: 1
   tiltAngle: -10
   tiltSpeed: 2
-  resetSpeed: 2
   blinkDuration: 3
   blinkColor: {r: 1, g: 0, b: 0, a: 1}
   blinkInterval: 0.2
-  health: 700
-  objectCollider: {fileID: 3467353556734815288}
   objectRenderer: {fileID: 1560784733691591982}
+  health: 700
   hitSound: {fileID: 8300000, guid: 10059b65e11fd30488386a62c589c40f, type: 3}
-  prefab1: {fileID: 5452607850076566507, guid: 5677d8a19ffb071479e8d82768081574, type: 3}
-  prefab2: {fileID: 726262522130735890, guid: 0da595aede963474b82278c9bc8d883d, type: 3}
-  prefab3: {fileID: 6449168085698916334, guid: bc3d90db9da63cd4e994523b6716c8cd, type: 3}
-  spawnPoints1:
+  firePoints1:
   - {fileID: 7817002239047708945}
   - {fileID: 3227669471676467065}
-  spawnPoints2:
+  firePoints2:
   - {fileID: 4524772315483958557}
   - {fileID: 8242968974186244687}
-  spawnPoints3:
+  firePoints3:
   - {fileID: 8994446411889148188}
   - {fileID: 6436212129238193795}
-  fireRatePrefab1: 2
-  fireRatePrefab2: 0
-  fireRatePrefab3: 0
-  virtualCamera: {fileID: 0}
-  player: {fileID: 0}
-  phase2Objects:
-  - {fileID: 7104057674213318030}
-  - {fileID: 3831363892129144595}
-  phase3Objects:
-  - {fileID: 1638711782534355524}
-  - {fileID: 8573363541482720931}
-  focusObject: {fileID: 3115347913953143426}
+  prefab1: {fileID: 5452607850076566507, guid: 5677d8a19ffb071479e8d82768081574, type: 3}
+  prefab2: {fileID: 3987060337679514883, guid: 62a68bc4303064847851521d1fc2969e, type: 3}
+  prefab3: {fileID: 6892987065795879821, guid: 4a3ae390378c9614691a7209eba5d251, type: 3}
+  fireIntervalPrefab1: 5
+  fireFramePrefab2And3: 5
 --- !u!65 &3467353556734815288
 BoxCollider:
   m_ObjectHideFlags: 0
