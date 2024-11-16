@@ -10,10 +10,9 @@ public class WhiplashShooter : MonoBehaviour, IDamage
     public Transform[] firePoints;  // Puntos desde los cuales disparar
 
     private int currentPointIndex = 0; // Índice del punto actual en el arreglo
-    private float t = 0f;               // Variable para interpolar entre los puntos
-    public float health = 50f;          // Vida del enemigo
-    private Renderer enemyRenderer;     // Para acceder al Renderer del objeto
-    public Material originalMaterial;   // Para guardar el material original
+    public float health = 50f;         // Vida del enemigo
+    private Renderer enemyRenderer;    // Para acceder al Renderer del objeto
+    public Material originalMaterial;  // Para guardar el material original
 
     public AudioClip hitSound;
     private AudioSource audioSource;
@@ -21,6 +20,15 @@ public class WhiplashShooter : MonoBehaviour, IDamage
 
     void Start()
     {
+        // Verifica que hay al menos dos puntos en el camino
+        if (pathPoints.Length < 2)
+        {
+            StartCoroutine(AutoShoot()); // Inicia la rutina de disparo automático
+        }
+
+        // Establece la posición inicial de la nave en el primer punto
+        transform.position = pathPoints[0].position;
+
         enemyRenderer = GetComponent<Renderer>();
         StartCoroutine(AutoShoot()); // Inicia la rutina de disparo automático
 
@@ -31,29 +39,30 @@ public class WhiplashShooter : MonoBehaviour, IDamage
 
     void Update()
     {
-        MoveShip();  // Llama a la función para mover la nave
+        if (pathPoints.Length >= 2) // Asegura que hay suficientes puntos
+        {
+            MoveShip();
+        }
+    }
+
+    void OnEnable()
+    {
+        StartCoroutine(AutoShoot()); // Inicia la rutina de disparo automático al activarse
     }
 
     void MoveShip()
     {
-        // Asegúrate de que hay al menos 2 puntos en el arreglo para moverse
-        if (pathPoints.Length < 2) return;
-
         // Punto actual y siguiente en el camino
-        Transform startPoint = pathPoints[currentPointIndex];
         Transform endPoint = pathPoints[(currentPointIndex + 1) % pathPoints.Length];
 
-        // Interpola entre los puntos actuales
-        t += Time.deltaTime * moveSpeed;
+        // Mueve la nave hacia el siguiente punto usando MoveTowards
+        transform.position = Vector3.MoveTowards(transform.position, endPoint.position, moveSpeed * Time.deltaTime);
 
-        if (t > 1f)  // Si ha llegado al final del punto actual, pasa al siguiente punto
+        // Si la nave ha llegado al punto final, avanza al siguiente punto
+        if (Vector3.Distance(transform.position, endPoint.position) < 0.1f)
         {
-            t = 0f; // Reinicia t para el próximo segmento
             currentPointIndex = (currentPointIndex + 1) % pathPoints.Length; // Avanza al siguiente punto
         }
-
-        // Actualiza la posición de la nave entre los puntos usando Lerp
-        transform.position = Vector3.Lerp(startPoint.position, endPoint.position, t);
     }
 
     IEnumerator AutoShoot()

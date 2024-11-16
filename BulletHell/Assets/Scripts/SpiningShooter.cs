@@ -34,6 +34,11 @@ public class SpiningShooter : MonoBehaviour, IDamage
         SpinObject();
     }
 
+    void OnEnable()
+    {
+        StartCoroutine(AutoShoot()); // Inicia la rutina de disparo automático al activarse
+    }
+
     void SpinObject()
     {
         transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime, Space.World);

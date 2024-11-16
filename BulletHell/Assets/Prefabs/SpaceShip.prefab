@@ -59,7 +59,7 @@ MonoBehaviour:
   forwardSpeed: 30
   strafeSpeed: 10
   hoverSpeed: 30
-  lookRateSpeed: 45
+  lookRateSpeed: 80
   tiltAmount: 45
   rollSpeed: 90
   rollAcceleration: 3.5
@@ -71,12 +71,12 @@ MonoBehaviour:
   firePoints:
   - {fileID: 6541737736571654962}
   - {fileID: 2439182274860005073}
-  fireRate: 0.5
+  fireRate: 0.25
   fireSound: {fileID: 8300000, guid: c25ce773efac26f489d70925156c188c, type: 3}
   hitSound: {fileID: 8300000, guid: 7ce40922bdb9daa4b9d78505adbed609, type: 3}
   gameOverSound: {fileID: 8300000, guid: 71549cc097af2c0489658cfdc2ba0312, type: 3}
   backgroundMusic: {fileID: 0}
-  playerHealth: 120
+  playerHealth: 300
   healthBarController: {fileID: 0}
   playerRenderer: {fileID: 9132837480714345921}
   originalMaterial: {fileID: 2100000, guid: 9003f59f5b9eff54ea66569f1bbfe305, type: 2}

@@ -219,13 +219,13 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 0}
   - {fileID: 0}
-  moveSpeed: 0.5
+  moveSpeed: 20
   bulletPrefab: {fileID: 6449168085698916334, guid: bc3d90db9da63cd4e994523b6716c8cd, type: 3}
-  fireRate: 0.05
+  fireRate: 0.5
   firePoints:
   - {fileID: 911897363253655188}
   - {fileID: 2687905833951654902}
-  health: 50
+  health: 75
   originalMaterial: {fileID: 2100000, guid: d79a83adef48e0c41bf93a4d0491ac1d, type: 2}
   hitSound: {fileID: 8300000, guid: 10059b65e11fd30488386a62c589c40f, type: 3}
   enemyManager: {fileID: 0}

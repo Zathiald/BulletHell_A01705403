@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7870953526022126877}
   - component: {fileID: 7312035402127356604}
   - component: {fileID: 3214013368549079162}
-  - component: {fileID: 1929024652232128990}
   m_Layer: 0
   m_Name: WhiplashBullet
   m_TagString: Enemy
@@ -154,20 +153,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.2940981, y: 100.56002, z: 3.3726034}
   m_Center: {x: -0.08353554, y: 49.999996, z: 0.1750993}
---- !u!114 &1929024652232128990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6449168085698916334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d91c4eba9596224c8abb31b62dedc31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 70
-  waveAmplitude: 110
-  waveFrequency: 20
-  timeDestroy: 2
-  damage: 10
