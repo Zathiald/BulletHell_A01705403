@@ -1019,8 +1019,8 @@ MonoBehaviour:
   prefab1: {fileID: 5452607850076566507, guid: 5677d8a19ffb071479e8d82768081574, type: 3}
   prefab2: {fileID: 3987060337679514883, guid: 62a68bc4303064847851521d1fc2969e, type: 3}
   prefab3: {fileID: 6892987065795879821, guid: 4a3ae390378c9614691a7209eba5d251, type: 3}
-  fireIntervalPrefab1: 5
-  fireFramePrefab2And3: 5
+  fireIntervalPrefab1: 1.5
+  fireFramePrefab2And3: 0
 --- !u!65 &3467353556734815288
 BoxCollider:
   m_ObjectHideFlags: 0

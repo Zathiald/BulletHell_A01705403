@@ -103,7 +103,7 @@ public class HomingBullet : MonoBehaviour
             if (playerController != null)
             {
                 Debug.Log("[HomingBullet] Aplicando daño al jugador: " + damage);
-                //playerController.TakeDamage(damage, new Color(1f, 0.5f, 0f));
+                playerController.TakeDamage(damage, new Color(1f, 0.5f, 0f));
             }
             Destroy(gameObject);
         }

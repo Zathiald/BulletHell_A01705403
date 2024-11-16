@@ -169,5 +169,5 @@ MonoBehaviour:
   speed: 80
   waveAmplitude: 110
   waveFrequency: 10
-  timeDestroy: 1.5
+  timeDestroy: 3
   damage: 10

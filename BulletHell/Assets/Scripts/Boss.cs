@@ -154,8 +154,8 @@ public class Boss : MonoBehaviour, IDamage
         {
             if (isRotating)
             {
-                FireFromPoints(firePoints, prefab);
                 yield return new WaitForSeconds(interval);
+                FireFromPoints(firePoints, prefab);
             }
             else
             {
@@ -166,21 +166,27 @@ public class Boss : MonoBehaviour, IDamage
 
     private IEnumerator ManageFirePrefab2And3()
     {
+        bool isFiringPrefab2 = false;
+        bool isFiringPrefab3 = false;
+
         while (true)
         {
-            if (health <= 0.75f * maxHealth)
+            if (health <= 0.75f * maxHealth && !isFiringPrefab2)
             {
+                isFiringPrefab2 = true;
                 StartCoroutine(FireContinuously(firePoints2, prefab2, fireFramePrefab2And3));
             }
 
-            if (health <= 0.5f * maxHealth)
+            if (health <= 0.5f * maxHealth && !isFiringPrefab3)
             {
+                isFiringPrefab3 = true;
                 StartCoroutine(FireContinuously(firePoints3, prefab3, fireFramePrefab2And3));
             }
 
-            yield return null; // Verificar las condiciones cada frame
+            yield return null;
         }
     }
+
 
     private void FireFromPoints(Transform[] firePoints, GameObject prefab)
     {

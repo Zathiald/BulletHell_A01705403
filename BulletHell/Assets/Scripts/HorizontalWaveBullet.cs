@@ -16,32 +16,26 @@ public class HorizontalWaveBullet : MonoBehaviour
     {
         // Inicializa el Rigidbody
         rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody no encontrado en la bala.");
-            return;
-        }
-
-        // Programa la destrucción de la bala después de un tiempo
-        Destroy(gameObject, timeDestroy);
     }
 
     void FixedUpdate()
     {
-        if (rb == null)
-            return;
+        if (rb != null)
+        {
+            // Incrementa el tiempo transcurrido
+            elapsedTime += Time.fixedDeltaTime;
 
-        // Incrementa el tiempo transcurrido
-        elapsedTime += Time.fixedDeltaTime;
+            // Calcula el desplazamiento horizontal (movimiento ondulatorio)
+            float xOffset = Mathf.Sin(elapsedTime * waveFrequency) * waveAmplitude;
 
-        // Calcula el desplazamiento horizontal (movimiento ondulatorio)
-        float xOffset = Mathf.Sin(elapsedTime * waveFrequency) * waveAmplitude;
+            // Aplica el movimiento hacia adelante y el desplazamiento ondulatorio en X
+            Vector3 forwardMovement = transform.forward * speed; // Usa transform.forward para avanzar
+            Vector3 horizontalMovement = transform.right * xOffset; // Usa transform.right para el movimiento en X
 
-        // Aplica el movimiento hacia adelante y el desplazamiento ondulatorio en X
-        Vector3 forwardMovement = transform.forward * speed; // Usa transform.forward para avanzar
-        Vector3 horizontalMovement = transform.right * xOffset; // Usa transform.right para el movimiento en X
-
-        rb.velocity = forwardMovement + horizontalMovement;
+            rb.velocity = forwardMovement + horizontalMovement;
+            // Programa la destrucción de la bala después de un tiempo
+            Destroy(gameObject, timeDestroy);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -52,7 +46,7 @@ public class HorizontalWaveBullet : MonoBehaviour
             var player = other.GetComponent<ShipController>();
             if (player != null)
             {
-                player.TakeDamage(damage, Color.red); // Puedes cambiar el color según el tipo de bala
+                player.TakeDamage(damage, new Color(1f, 0.5f, 0f));
             }
 
             Destroy(gameObject); // Destruye la bala al impactar

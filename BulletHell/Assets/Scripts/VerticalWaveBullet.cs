@@ -16,31 +16,25 @@ public class VerticalWaveBullet : MonoBehaviour
     {
         // Inicializa el Rigidbody
         rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody no encontrado en la bala.");
-            return;
-        }
-        // Programa la destrucción de la bala después de un tiempo
-        Destroy(gameObject, timeDestroy);
     }
 
     void FixedUpdate()
     {
-        if (rb == null)
-            return;
+        if (rb != null)
+        {
+            // Incrementa el tiempo transcurrido
+            elapsedTime += Time.fixedDeltaTime;
 
-        // Incrementa el tiempo transcurrido
-        elapsedTime += Time.fixedDeltaTime;
+            // Calcula el desplazamiento vertical (movimiento ondulatorio)
+            float yOffset = Mathf.Sin(elapsedTime * waveFrequency) * waveAmplitude;
 
-        // Calcula el desplazamiento vertical (movimiento ondulatorio)
-        float yOffset = Mathf.Sin(elapsedTime * waveFrequency) * waveAmplitude;
+            // Aplica el movimiento hacia adelante y el desplazamiento ondulatorio
+            Vector3 forwardMovement = transform.forward * speed; // Usa transform.forward para el movimiento hacia adelante
+            Vector3 verticalMovement = new Vector3(0f, yOffset, 0f);
 
-        // Aplica el movimiento hacia adelante y el desplazamiento ondulatorio
-        Vector3 forwardMovement = transform.forward * speed; // Usa transform.forward para el movimiento hacia adelante
-        Vector3 verticalMovement = new Vector3(0f, yOffset, 0f);
-
-        rb.velocity = forwardMovement + verticalMovement;
+            rb.velocity = forwardMovement + verticalMovement;
+            Destroy(gameObject, timeDestroy);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -51,7 +45,7 @@ public class VerticalWaveBullet : MonoBehaviour
             var player = other.GetComponent<ShipController>();
             if (player != null)
             {
-                player.TakeDamage(damage, Color.blue);
+                player.TakeDamage(damage, new Color(1f, 0.5f, 0f));
             }
 
             Destroy(gameObject); // Destruye la bala al impactar

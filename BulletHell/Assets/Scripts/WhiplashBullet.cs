@@ -38,10 +38,6 @@ public class WhiplashBullet : MonoBehaviour
             // Destruye la bala después de un tiempo determinado
             Destroy(gameObject, timeDestroy);
         }
-        else
-        {
-            Debug.LogError("Rigidbody no encontrado en la bala.");
-        }
     }
 
     void OnTriggerEnter(Collider other)
