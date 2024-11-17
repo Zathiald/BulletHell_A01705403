@@ -59,7 +59,7 @@ MonoBehaviour:
   forwardSpeed: 30
   strafeSpeed: 10
   hoverSpeed: 30
-  lookRateSpeed: 80
+  lookRateSpeed: 120
   tiltAmount: 45
   rollSpeed: 90
   rollAcceleration: 3.5
