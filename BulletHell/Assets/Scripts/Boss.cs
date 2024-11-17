@@ -19,7 +19,9 @@ public class Boss : MonoBehaviour, IDamage
     public float health = 50f;
     private float maxHealth = 50f;
     public AudioClip hitSound;
+    public AudioClip gameWinSound;
     private AudioSource audioSource;
+    public AudioSource backgroundMusic;
 
     [Header("Firepoints and Prefabs")]
     public Transform[] firePoints1;
@@ -28,15 +30,20 @@ public class Boss : MonoBehaviour, IDamage
     public GameObject prefab1;
     public GameObject prefab2;
     public GameObject prefab3;
-
     public float fireIntervalPrefab1 = 2f; // Intervalo para prefab1
     public float fireFramePrefab2And3 = 0.5f; // Intervalo entre disparos de prefab2 y prefab3
+    private Collider BossCollider;
+    public HealthBarController healthBarController;
 
     void Start()
     {
         isAnimating = false;
         isRotating = false;
         maxHealth = health;
+        BossCollider = GetComponent<Collider>();
+
+        if (BossCollider != null)
+            BossCollider.enabled = false;
 
         if (objectRenderer != null)
             originalColor = objectRenderer.material.color;
@@ -46,6 +53,7 @@ public class Boss : MonoBehaviour, IDamage
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = hitSound;
         audioSource.playOnAwake = false;
+        healthBarController.TakeDamage(health);
     }
 
     private IEnumerator SpinAndAnimate()
@@ -103,14 +111,13 @@ public class Boss : MonoBehaviour, IDamage
         float blinkTimer = 0f;
         bool isVisible = true;
 
+        if (BossCollider != null)
+            BossCollider.enabled = true;
+
         while (blinkTimer < blinkDuration)
         {
             blinkTimer += blinkInterval;
             isVisible = !isVisible;
-
-            if (objectRenderer != null)
-                objectRenderer.material.color = isVisible ? blinkColor : originalColor;
-
             yield return new WaitForSeconds(blinkInterval);
         }
 
@@ -137,15 +144,39 @@ public class Boss : MonoBehaviour, IDamage
         health -= damage;
         Debug.Log("Enemigo Boss dañado. Vida restante: " + health);
 
+        if (objectRenderer != null)
+        {
+            // Cambiar el color del material a rojo
+            objectRenderer.material.color = Color.red;
+
+            // Llamar a la corutina para restaurar el color después de 1 segundo
+            StartCoroutine(ResetColor());
+        }
+
         if (audioSource != null && hitSound != null)
         {
             audioSource.PlayOneShot(hitSound);
         }
 
+        healthBarController.TakeDamage(damage);
+
         if (health <= 0)
         {
             Die();
         }
+    }
+
+    IEnumerator ResetColor()
+    {
+        // Espera 1 segundo
+        yield return new WaitForSeconds(0.5f);
+
+        // Restaurar el material original
+        if (objectRenderer != null && originalColor != null)
+        {
+            objectRenderer.material.color = originalColor;
+        } 
+
     }
 
     private IEnumerator FireContinuously(Transform[] firePoints, GameObject prefab, float interval)
@@ -203,5 +234,17 @@ public class Boss : MonoBehaviour, IDamage
     {
         Debug.Log("Enemigo destruido");
         Destroy(gameObject);
+        if (backgroundMusic != null)
+        {
+            // Detener la música de fondo
+            backgroundMusic.Stop();
+        }
+
+        if (audioSource != null && gameWinSound != null)
+        {
+            // Reproducir el sonido de "Game Over" en el AudioSource para efectos de sonido
+            backgroundMusic.PlayOneShot(gameWinSound);
+        }
+        GameObject.FindObjectOfType<GameWinEffect>().TriggerGameWin();
     }
 }

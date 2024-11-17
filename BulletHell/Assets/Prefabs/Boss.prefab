@@ -1007,6 +1007,8 @@ MonoBehaviour:
   objectRenderer: {fileID: 1560784733691591982}
   health: 700
   hitSound: {fileID: 8300000, guid: 10059b65e11fd30488386a62c589c40f, type: 3}
+  gameWinSound: {fileID: 8300000, guid: 8bacba56cf0cadf4295be56c231942f4, type: 3}
+  backgroundMusic: {fileID: 0}
   firePoints1:
   - {fileID: 7817002239047708945}
   - {fileID: 3227669471676467065}
@@ -1021,6 +1023,7 @@ MonoBehaviour:
   prefab3: {fileID: 6892987065795879821, guid: 4a3ae390378c9614691a7209eba5d251, type: 3}
   fireIntervalPrefab1: 1.5
   fireFramePrefab2And3: 0
+  healthBarController: {fileID: 0}
 --- !u!65 &3467353556734815288
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -396,7 +396,7 @@ MonoBehaviour:
   - {fileID: 1353578261544885524}
   - {fileID: 5886824930275862858}
   - {fileID: 9202828363954761446}
-  health: 50
+  health: 10
   hitSound: {fileID: 8300000, guid: 10059b65e11fd30488386a62c589c40f, type: 3}
   enemyManager: {fileID: 0}
 --- !u!65 &4286441755565734729

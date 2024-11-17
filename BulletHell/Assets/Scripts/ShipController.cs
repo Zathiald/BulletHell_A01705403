@@ -42,7 +42,7 @@ public class ShipController : MonoBehaviour
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
         Cursor.lockState = CursorLockMode.Confined;
-        healthBarController.TakeDamage(120);
+        healthBarController.TakeDamage(playerHealth);
 
         // Configura el componente de audio
         audioSource = gameObject.AddComponent<AudioSource>();
